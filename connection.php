@@ -9,7 +9,7 @@ class Connection {
     public function __construct()
     {
         $this->databaseFile = realpath(__DIR__ . "/database/db.sqlite");
-        $this->connect();
+        $this->getConnection();
     }
 
     private function connect()
@@ -31,15 +31,14 @@ class Connection {
         return $result;
     }
 
-    public function insert($query, $user, $email, $colorId)
+    public function insert($query, $user, $email)
     {
         try
         {
             $statement = $this->getConnection()->prepare($query);
             $statement->execute([
                 ':name' => $user,
-                ':email' => $email,
-                ':colorId' => $colorId
+                ':email' => $email
             ]);
         } 
         catch (PDOException $exception) 
