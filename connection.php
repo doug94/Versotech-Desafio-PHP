@@ -47,14 +47,14 @@ class Connection {
         }
     }
 
-    public function update($query, $user, $email, $colorId)
+    public function update($query, $user, $email, $userId)
     {
         try 
         {
             $statement = $this->getConnection()->prepare($query);
             $statement->bindParam(':name', $user);
             $statement->bindParam(':email', $email);
-            $statement->bindParam(':colorId', $colorId);
+            $statement->bindParam(':id', $userId, PDO::PARAM_INT);
             $statement->execute();
         } 
         catch (PDOException $exception) 

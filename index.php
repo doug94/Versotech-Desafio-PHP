@@ -1,5 +1,7 @@
 <?php
 
+include 'header.php';
+
 require 'connection.php';
 
 $connection = new Connection();
@@ -23,13 +25,15 @@ foreach($users as $user) {
                       <td>%s</td>
                       <td>%s</td>
                       <td>
-                           <a href='#'>Editar</a>
+                           <a href='post.php?id=%s'>Editar</a>
                            <a href='#'>Excluir</a>
                       </td>
                    </tr>",
-        $user->id, $user->name, $user->email);
+        $user->id, $user->name, $user->email, $user->id);
 
 }
 
 echo "</table><br>";
 echo "<a href='post.php'>Adicionar Usuário</a>";
+
+include 'footer.php';

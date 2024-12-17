@@ -1,33 +1,22 @@
-<html>
-    <head></head>
-    <body>
-        <?php if ($_SERVER['REQUEST_METHOD'] === 'GET') : ?>
-            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-                <div>
-                    <label for="name">Nome:</label>
-                    <input type="text" name="name" />
-                </div>
+<?php include 'header.php' ?>
 
-                <div>
-                    <label for="name">Email:</label>
-                    <input type="email" name="email" />
-                </div>
+<form action="<?php echo (isset($_GET['id'])) ? 'edit_user.php' : 'add_user.php' ?>" method="post">
+    <div>
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" />
+    </div>
 
-                <button type="submit">Adicionar</button>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+    </div>
 
-            </form>
-        <?php else : ?>
-            <?php
-                if (isset($_POST['name'], $_POST['email'])) {
-                    $name = $_POST['name'];
-                    $email = $_POST['email'];
-                    $query = "INSERT INTO users(name, email) VALUES(:name, :email)";
-                    require 'connection.php';
-                    $connection = new Connection();
-                    $connection->insert($query, $name, $email);
-                    echo '<script>window.location.href = "index.php";</script>';
-                }
-            ?>
-        <?php endif ?>
-    </body>
-</html>
+    <div hidden>
+        <input type="hidden" name="userId" value="<?php $_GET['id'] ?>" />
+    </div>
+
+    <button type="submit">Adicionar</button>
+
+</form>
+
+<?php include 'footer.php' ?>
